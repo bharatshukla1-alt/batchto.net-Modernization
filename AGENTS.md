@@ -49,11 +49,12 @@ testRepo/
 │   │       └── Target-Neutrality.md          # Target-neutral extraction rules (no target bias)
 │   └── Specs/
 │       └── INTCALC-Modernization-Spec.md     # Detailed batch specification for INTCALC (CBACT04C)
-├── jcl/                                     # READ-ONLY source JCL jobs (INTCALC, READACCT, READCARD)
-├── cbl/                                     # READ-ONLY source COBOL batch programs (CBACT01C, CBACT02C, CBACT04C)
-├── cpy/                                     # READ-ONLY source Copybooks (CVACT01Y, CVTRA01Y, etc.)
-├── proc/ & asm/                             # READ-ONLY cataloged batch procedures and assembler routines
-├── data/                                    # READ-ONLY EBCDIC batch files & test datasets
+├── input/                                   # READ-ONLY source legacy mainframe assets
+│   ├── jcl/                                 # JCL jobs (INTCALC, READACCT, READCARD)
+│   ├── cbl/                                 # COBOL batch programs (CBACT01C, CBACT02C, CBACT04C)
+│   ├── cpy/                                 # Copybooks (CVACT01Y, CVTRA01Y, etc.)
+│   ├── proc/ & asm/                         # Cataloged batch procedures and assembler routines
+│   └── data/                                # EBCDIC batch files & test datasets
 ├── Artefacts/                               # All analysis, specifications, and reports produced by agents
 │   ├── Discovery/                           # Jcl-Facts, Program-Facts, CA-7 schedule, and BRE extractions
 │   ├── Review/                              # Review-Gate1.md, ReviewGate2.md audits
@@ -84,7 +85,7 @@ testRepo/
 
 ## 2. Golden Rules for Batch Modernization
 
-1. **Source Immutability**: `jcl/`, `cbl/`, `cpy/`, `proc/`, and `data/` are **READ-ONLY**. Never alter, reformat, or write to legacy source folders.
+1. **Source Immutability**: `input/` (`input/jcl/`, `input/cbl/`, `input/cpy/`, `input/proc/`, and `input/data/`) is **READ-ONLY**. Never alter, reformat, or write to legacy source folders.
 2. **Scope Constraint**: **STRICTLY BATCH WORKLOADS**. No online transaction processing (CICS/IMS TM), 3270 screens, BMS maps, or web frontend code. The target is an automated batch pipeline.
 3. **Target Neutrality in Early Phases**: Phases 1, 2, and 3 must remain strictly target-agnostic. No target syntax (`Spark`, `PySpark`, `Java`, `.NET`) in extraction facts or Canonical IR.
 4. **No Fabrication (Anti-Hallucination)**: Every extracted business rule, data structure, and step constraint MUST cite direct line-level evidence in the source repository (`cbl/`, `cpy/`, `jcl/`). Missing information must be recorded as a `GAP-XXX` rather than assumed.

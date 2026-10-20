@@ -24,7 +24,7 @@ namespace CardDemo.Host
             Console.WriteLine("================================================================================");
 
             string repoRoot = @"C:\Users\2571594\.gemini\antigravity\scratch\dotnet-batch-modernization";
-            string dataEbcdic = Path.Combine(repoRoot, "data", "EBCDIC");
+            string dataEbcdic = Path.Combine(repoRoot, "input", "data", "EBCDIC");
             string outputBase = Path.Combine(repoRoot, "output");
 
             string outReadAcct = Path.Combine(outputBase, "readacct");
